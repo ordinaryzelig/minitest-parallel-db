@@ -1,26 +1,32 @@
 require_relative '../../helper'
 require_relative '../../support/postgres'
 
+require 'active_record'
+
 # Model
 class PostgresActiveRecordModel < ActiveRecord::Base
   validates :name, uniqueness: true
 end
 PARM = PostgresActiveRecordModel
 
+db_config = PG::CONFIG.merge(
+  adapter: 'postgresql',
+)
+
 # Create database.
 begin
-  PARM.establish_connection(PG::CONFIG)
+  PARM.establish_connection(db_config)
   PARM.connection
 rescue
   ActiveRecord::Base.establish_connection(
-    adapter:             PG::CONFIG[:adapter],
+    adapter:             db_config[:adapter],
     database:            'postgres',
     schema_search_path:  'public',
   )
-  ActiveRecord::Base.connection.create_database(PG::CONFIG[:database])
+  ActiveRecord::Base.connection.create_database(db_config[:database])
 end
 
-PARM.establish_connection(PG::CONFIG)
+PARM.establish_connection(db_config)
 
 # Cleanup/migration
 if PARM.table_exists?
