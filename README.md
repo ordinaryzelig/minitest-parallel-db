@@ -46,8 +46,8 @@ Bear with me for a second and ignore the fact that these tests are badly written
 The important thing I want to point out is the problem with running these tests in parallel.
 It is entirely possible for the test suite to play out chronologically like this:
 
-order |`saves a record`                | `edits a record`
------ | ------------------------------ | ----------------
+order | saves a record                 | edits a record
+----- | ------------------------------ | --------------
 1 | model = Model.create!              |
 2 |                                    | Model.create!
 3 |                                    | Model.last.update_attributes(name: 'changed')
@@ -80,10 +80,10 @@ end
 Database transactions also have another neat feature:
 they are only visible to that connection.
 
-Let's do another example to deomonstrate:
+Let's do another example to demonstrate:
 
-order |`User 1`                | `User 2`
------ | ---------------------- | --------
+order | User 1`                | User 2
+----- | ---------------------- | ------
 1 | model = Model.create!      |
 2 |                            | Model.create!
 3 | Model.count.must_equal 1   |
