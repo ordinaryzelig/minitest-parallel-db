@@ -38,4 +38,6 @@ else
 end
 
 # Minitest threads
-ENV['N'] = (PARM.connection_config[:pool] - 1).to_s
+ENV['N'] = PARM.connection_config[:pool].to_s
+
+PARM.connection.close
