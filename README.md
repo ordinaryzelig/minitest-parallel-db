@@ -82,7 +82,7 @@ they are only visible to that connection.
 
 Let's do another example to demonstrate:
 
-order | User 1`                | User 2
+order | User 1                 | User 2
 ----- | ---------------------- | ------
 1 | model = Model.create!      |
 2 |                            | Model.create!
