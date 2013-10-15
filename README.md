@@ -19,7 +19,8 @@ Tests in parallel must be run in isolation.
 If the tests are sharing the same database and table,
 we have a problem.
 But if we can use a database transaction for each test,
-they will be run in isolation from each other.
+they will be run in isolation from each other, although
+write locks are still in effect.
 
 ### Long version (less jargon)
 
@@ -108,6 +109,22 @@ these tests will pass no matter what order their code is run chronologically.
 * `require 'minitest-parallel_db'`
 * extend appropriate module (e.g. `describe('postgres tests') { extend Minitest::ParallelDb::Postgres }`
 * There is no step 3! All your tests are automatically parallel now, and "transaction-safe".
+
+## Tips
+
+### Use sequences with factories to avoid write blocks on unique fields
+
+If you have a field that is unique (i.e. the database defines it as unique,
+not just unique by a model validation), use sequences in your factories.
+Unique indexes will be enforced by the database (even if the writes are
+in their own transactions), and it will block writes, slowing you down a bit.
+To avoid that, use sequences where you can to easily avoid duplicates.
+
+```
+factory :users do
+  sequence(:username) { |idx| "user #{idx}" }
+end
+```
 
 ## Requirements
 
