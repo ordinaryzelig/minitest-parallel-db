@@ -1,7 +1,10 @@
 require_relative '../../helper'
 require_relative '../../support/postgres'
 
+require 'logger'
 require 'active_record'
+
+#ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 # Model
 class PostgresActiveRecordModel < ActiveRecord::Base
@@ -28,11 +31,10 @@ end
 
 PARM.establish_connection(db_config)
 
-# Cleanup/migration
-if PARM.table_exists?
-  PARM.delete_all
-else
-  PARM.connection.create_table PARM.table_name do |t|
+# Migration
+PARM.connection.tap do |conn|
+  conn.drop_table PARM.table_name if PARM.table_exists?
+  conn.create_table PARM.table_name do |t|
     t.string :name, null: false
   end
 end
