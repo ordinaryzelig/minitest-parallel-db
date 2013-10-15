@@ -78,7 +78,9 @@ end
 ```
 
 Database transactions also have another neat feature:
-they are only visible to that connection.
+they are only visible to that connection*.
+
+_*At least for the most part. Read about unique indexes and write locks for more info._
 
 Let's do another example to demonstrate:
 
