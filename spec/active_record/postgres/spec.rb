@@ -6,7 +6,7 @@ describe 'ActiveRecord + Postgres' do
 
   let(:model) { PARM }
 
-  PARM.connection_config[:pool].times do |idx|
+  ActiveRecord::Base.connection_config[:pool].times do |idx|
     it "tests in parallel (#{idx + 1})" do
       PARM.create! name: "name #{idx}"
 

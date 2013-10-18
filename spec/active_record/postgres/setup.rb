@@ -14,8 +14,8 @@ db_config = DB_CONFIG[:postgres].merge(
 
 # Create database.
 begin
-  PARM.establish_connection(db_config)
-  PARM.connection
+  ActiveRecord::Base.establish_connection(db_config)
+  ActiveRecord::Base.connection
 rescue
   ActiveRecord::Base.establish_connection(
     adapter:             db_config[:adapter],
@@ -25,10 +25,10 @@ rescue
   ActiveRecord::Base.connection.create_database(db_config[:database])
 end
 
-PARM.establish_connection(db_config)
+ActiveRecord::Base.establish_connection(db_config)
 
 # Migration
-PARM.connection.tap do |conn|
+ActiveRecord::Base.connection.tap do |conn|
   conn.drop_table PARM.table_name if PARM.table_exists?
   conn.create_table PARM.table_name do |t|
     t.string :name, null: false
@@ -36,6 +36,6 @@ PARM.connection.tap do |conn|
 end
 
 # Minitest threads
-ENV['N'] = PARM.connection_config[:pool].to_s
+ENV['N'] = ActiveRecord::Base.connection_config[:pool].to_s
 
-PARM.connection.close
+ActiveRecord::Base.connection.close
