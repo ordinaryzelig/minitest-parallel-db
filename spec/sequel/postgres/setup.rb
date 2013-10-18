@@ -33,6 +33,4 @@ end
 PSM = PostgresSequelModel
 
 # Minitest threads
-ENV['N'] ||= (DB.pool.max_size - 1).to_s
-
-DB.disconnect
+ENV['N'] ||= DB.pool.max_size.to_s

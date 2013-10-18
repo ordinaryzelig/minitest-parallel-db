@@ -2,9 +2,9 @@ require_relative 'setup'
 
 describe 'Sequel + Postgres' do
 
-  extend Minitest::ParallelDb::Sequel
+  include Minitest::ParallelDb::Sequel
 
-  (DB.pool.max_size - 1).times do |idx|
+  DB.pool.max_size.times do |idx|
     it "tests in parallel (#{idx + 1})" do
       PSM.new(name: 'name').save
 

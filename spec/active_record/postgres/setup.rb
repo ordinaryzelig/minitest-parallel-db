@@ -1,10 +1,7 @@
 require_relative '../../helper'
 require_relative '../../support/postgres'
 
-require 'logger'
 require 'active_record'
-
-#ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 # Model
 class PostgresActiveRecordModel < ActiveRecord::Base

@@ -2,18 +2,17 @@ module Minitest
   module ParallelDb
     module ActiveRecord
 
-      def self.extended(suite)
+      def self.included(suite)
         suite.parallelize_me!
       end
 
-      def it(*args, &block)
-        super(*args) do
-          model.transaction do
-            block.call
-            raise ::ActiveRecord::Rollback
-          end
-          model.connection.close
+      def run
+        model.transaction do
+          super
+          raise ::ActiveRecord::Rollback
         end
+        model.connection.close
+        self
       end
 
     end
