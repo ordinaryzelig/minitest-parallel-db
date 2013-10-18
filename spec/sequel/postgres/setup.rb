@@ -1,16 +1,12 @@
 require_relative '../../helper'
-require_relative '../../support/postgres'
 
 require 'sequel'
-require 'logger'
 
 db_config = {
   adapter:          'postgres',
   host:             'localhost',
-  database:         PG::CONFIG[:database],
-  max_connections:  PG::CONFIG[:pool],
-  #logger:           Logger.new('log/db.log'),
-  #logger:           Logger.new($stdout),
+  database:         DB_CONFIG[:postgres][:database],
+  max_connections:  DB_CONFIG[:postgres][:pool],
 }
 
 DB = Sequel.postgres(db_config)

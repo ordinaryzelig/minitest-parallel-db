@@ -1,5 +1,4 @@
 require_relative '../../helper'
-require_relative '../../support/postgres'
 
 require 'active_record'
 
@@ -9,7 +8,7 @@ class PostgresActiveRecordModel < ActiveRecord::Base
 end
 PARM = PostgresActiveRecordModel
 
-db_config = PG::CONFIG.merge(
+db_config = DB_CONFIG[:postgres].merge(
   adapter: 'postgresql',
 )
 
