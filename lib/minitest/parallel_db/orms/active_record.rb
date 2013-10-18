@@ -5,16 +5,15 @@ module Minitest
     module ActiveRecord
 
       def self.included(suite)
-        suite.parallelize_me!
+        suite.send(:include, ParallelDb)
       end
 
-      def run
+      def adapter_run
         model.transaction do
-          super
+          yield
           raise ::ActiveRecord::Rollback
         end
         model.connection.close
-        self
       end
 
     end

@@ -5,14 +5,13 @@ module Minitest
     module Sequel
 
       def self.included(suite)
-        suite.parallelize_me!
+        suite.send(:include, ParallelDb)
       end
 
-      def run
+      def adapter_run
         DB.transaction(rollback: :always) do
-          super
+          yield
         end
-        self
       end
 
     end
