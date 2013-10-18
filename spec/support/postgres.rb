@@ -1,6 +1,3 @@
-# Database
-require 'pg'
-
 module PG
 
   CONFIG = {

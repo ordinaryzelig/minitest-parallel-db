@@ -1,3 +1,5 @@
+require 'pg'
+
 module Minitest
   module ParallelDb
     module Sequel
