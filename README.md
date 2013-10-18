@@ -1,5 +1,7 @@
 # Minitest::ParallelDb
 
+[![Build Status](https://travis-ci.org/ordinaryzelig/minitest-parallel_db.png?branch=master)](https://travis-ci.org/ordinaryzelig/minitest-parallel_db)
+
 Run Minitest in parallel with a database.
 
 ## Rationale
