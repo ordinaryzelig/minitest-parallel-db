@@ -87,7 +87,7 @@ _*At least for the most part. Read about unique indexes and write locks for more
 
 Let's do another example to demonstrate:
 
-order | User 1                 | User 2
+order | Test 1                 | Test 2
 ----- | ---------------------- | ------
 1 | model = Model.create!      |
 2 |                            | Model.create!
@@ -95,12 +95,12 @@ order | User 1                 | User 2
 4 |                            | Model.count.must_equal 1
 
 By the time #3 is executed, 2 models have been created.
-HOWEVER, if each user runs their code within their own transaction,
+HOWEVER, if each test runs their code within their own transaction,
 then the queries performed within those transactions are only visible
 to the connection that executed those queries.
-That means User 1 can't see the Model that User 2 created (and vice versa)
+That means Test 1 can't see the Model that Test 2 created (and vice versa)
 until the transactions are committed.
-If we just ensure that the transaction is rolled back after each test,
+If we just ensure that the transaction is undone (called a 'rollback') after each test,
 then no other test will ever be able to see anything any other test does.
 So, given the 2 tests are run in parallel and each is run within a transaction
 that will be rolled back,
@@ -108,9 +108,29 @@ these tests will pass no matter what order their code is run chronologically.
 
 ## Usage
 
-* `require 'minitest-parallel_db'`
-* extend appropriate module (e.g. `describe('postgres tests') { extend Minitest::ParallelDb::Postgres }`
-* There is no step 3! All your tests are automatically parallel now, and "transaction-safe".
+```ruby
+require 'minitest-parallel_db'
+# Set number of threads you want. Best to match your pool size.
+# Minitest defaults this to 2.
+ENV['N'] = 10 
+
+describe 'your parallel tests' do
+
+  include Minitest::ParallelDb::ActiveRecord
+
+  it 'saves a record' do
+    model = Model.create!
+    Model.first.id.must_equal model.id
+  end
+
+  it 'edits a record' do
+    Model.create!
+    Model.first.update_attributes(name: 'changed')
+    Model.first.name.must_equal 'changed'
+  end
+
+end
+```
 
 ## Tips
 
@@ -130,7 +150,7 @@ end
 
 ## Requirements
 
-* Postgres
+* Postgres (should work with databases that support transactions, but I haven't tried any)
 * Minitest >= 4.2 (where `parallelize_me!` exists)
 * Supported ORM (ActiveRecord, Sequel)
 * Get rid of DatabaseCleaner if you're using it.
