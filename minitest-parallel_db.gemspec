@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jared@redningja.com"]
   spec.description   = %q{Run tests in parallel with a database}
   spec.summary       = %q{Run tests in parallel with a database}
-  spec.homepage      = "'https://github.com/ordinaryzelig/minitest-parallel_db"
+  spec.homepage      = "https://github.com/ordinaryzelig/minitest-parallel_db"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
