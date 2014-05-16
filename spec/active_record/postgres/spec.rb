@@ -4,8 +4,6 @@ describe 'ActiveRecord + Postgres' do
 
   include Minitest::ParallelDb::ActiveRecord
 
-  let(:model) { PARM }
-
   ActiveRecord::Base.connection_config[:pool].times do |idx|
     it "tests in parallel (#{idx + 1})" do
       PARM.create! name: "name #{idx}"

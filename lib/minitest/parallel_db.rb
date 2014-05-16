@@ -10,6 +10,14 @@ module Minitest
       suite.parallelize_me!
     end
 
+    def self.concurrency=(num)
+      if Minitest.const_defined?(:Parallel)
+        Minitest.parallel_executor = Minitest::Parallel::Executor.new(num)
+      else
+        ENV['N'] = num
+      end
+    end
+
     def run
       adapter_run do
         super

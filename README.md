@@ -28,7 +28,7 @@ write locks are still in effect).
 require 'minitest-parallel_db'
 # Set number of threads you want. Best to match your pool size.
 # Minitest defaults this to 2.
-ENV['N'] = 10 
+Minitest::ParallelDb.concurrency = 10
 
 describe 'your parallel tests' do
 
@@ -37,13 +37,13 @@ describe 'your parallel tests' do
 
   it 'saves a record' do
     model = Model.create!
-    Model.first.id.must_equal model.id
+    Model.last.id.must_equal model.id
   end
 
   it 'edits a record' do
     Model.create!
-    Model.first.update_attributes(name: 'changed')
-    Model.first.name.must_equal 'changed'
+    Model.last.update_attributes(name: 'changed')
+    Model.last.name.must_equal 'changed'
   end
 
 end
@@ -55,6 +55,12 @@ end
 * Minitest >= 4.2 (where `parallelize_me!` exists)
 * Supported ORM (ActiveRecord, Sequel)
 * Get rid of DatabaseCleaner if you're using it.
+
+### Minitest versions
+
+At the time this gem was created, Minitest was at v4.7.5.
+Since then, the way to set the number of concurrent tests to be run has changed.
+Please let me know if the version of Minitest you are using doesn't work with this gme so I can try to patch the it.
 
 ## Tips
 
@@ -71,6 +77,11 @@ factory :users do
   sequence(:username) { |idx| "user #{idx}" }
 end
 ```
+
+## Running tests for this gem
+
+The safe way: run each of the scripts listed in `.travis.yml`.
+The quick way: `rake test`.
 
 ## Contributing
 

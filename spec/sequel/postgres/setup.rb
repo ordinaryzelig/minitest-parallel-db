@@ -28,5 +28,4 @@ class PostgresSequelModel < Sequel::Model
 end
 PSM = PostgresSequelModel
 
-# Minitest threads
-ENV['N'] ||= DB.pool.max_size.to_s
+Minitest::ParallelDb.concurrency = DB.pool.max_size
