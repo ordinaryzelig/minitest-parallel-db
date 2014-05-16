@@ -10,12 +10,19 @@ module Minitest
       suite.parallelize_me!
     end
 
-    def self.concurrency=(num)
-      if Minitest.const_defined?(:Parallel)
-        Minitest.parallel_executor = Minitest::Parallel::Executor.new(num)
-      else
-        ENV['N'] = num
+    class << self
+
+      attr_reader :concurrency
+
+      def concurrency=(num)
+        @concurrency = num
+        if Minitest.const_defined?(:Parallel)
+          Minitest.parallel_executor = Minitest::Parallel::Executor.new(num)
+        else
+          ENV['N'] = num
+        end
       end
+
     end
 
     def run
