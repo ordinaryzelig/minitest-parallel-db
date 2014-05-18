@@ -2,7 +2,7 @@ require_relative 'setup'
 
 describe 'Sequel + Postgres' do
 
-  include Minitest::ParallelDb::Sequel
+  include Minitest::Parallel::Db::Sequel
 
   DB.pool.max_size.times do |idx|
     it "tests in parallel (#{idx + 1})" do

@@ -1,11 +1,11 @@
 require 'pg'
 
 module Minitest
-  module ParallelDb
+  module Parallel::Db
     module Sequel
 
       def self.included(suite)
-        suite.send(:include, ParallelDb)
+        suite.send(:include, Parallel::Db)
       end
 
       def adapter_run

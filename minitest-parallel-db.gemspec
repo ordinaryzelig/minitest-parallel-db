@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'minitest/parallel_db/version'
+require 'minitest/parallel/db/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "minitest-parallel_db"
-  spec.version       = Minitest::ParallelDb::VERSION
+  spec.name          = "minitest-parallel-db"
+  spec.version       = Minitest::Parallel::Db::VERSION
   spec.authors       = ["Jared Ning"]
   spec.email         = ["jared@redningja.com"]
   spec.description   = %q{Run tests in parallel with a database}
   spec.summary       = %q{Run tests in parallel with a database}
-  spec.homepage      = "https://github.com/ordinaryzelig/minitest-parallel_db"
+  spec.homepage      = "https://github.com/ordinaryzelig/minitest-parallel-db"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

@@ -1,6 +1,6 @@
-# Minitest::ParallelDb
+# Minitest::Parallel::Db
 
-[![Build Status](https://travis-ci.org/ordinaryzelig/minitest-parallel_db.png?branch=master)](https://travis-ci.org/ordinaryzelig/minitest-parallel_db)
+[![Build Status](https://travis-ci.org/ordinaryzelig/minitest-parallel-db.png?branch=master)](https://travis-ci.org/ordinaryzelig/minitest-parallel-db)
 
 Run Minitest in parallel with a database.
 
@@ -25,15 +25,15 @@ write locks are still in effect).
 ## Usage
 
 ```ruby
-require 'minitest-parallel_db'
+require 'minitest/parallel/db'
 # Set number of threads you want. Best to match your pool size.
 # Minitest defaults this to 2.
-Minitest::ParallelDb.concurrency = 10
+Minitest::Parallel::Db.concurrency = 10
 
 describe 'your parallel tests' do
 
   # The tests within this describe block can now be run in parallel.
-  include Minitest::ParallelDb::ActiveRecord
+  include Minitest::Parallel::Db::ActiveRecord
 
   it 'saves a record' do
     model = Model.create!

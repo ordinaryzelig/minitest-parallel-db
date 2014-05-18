@@ -1,11 +1,11 @@
 require 'pg'
 
 module Minitest
-  module ParallelDb
+  module Parallel::Db
     module ActiveRecord
 
       def self.included(suite)
-        suite.send(:include, ParallelDb)
+        suite.send(:include, Parallel::Db)
         suite.send(:include, TestInstanceMethods)
       end
 

@@ -35,5 +35,5 @@ ActiveRecord::Base.connection.tap do |conn|
   end
 end
 
-Minitest::ParallelDb.concurrency = ActiveRecord::Base.connection_config[:pool]
+Minitest::Parallel::Db.concurrency = ActiveRecord::Base.connection_config[:pool]
 ActiveRecord::Base.connection.close

@@ -2,7 +2,7 @@ require_relative 'setup'
 
 describe 'ActiveRecord + Postgres' do
 
-  include Minitest::ParallelDb::ActiveRecord
+  include Minitest::Parallel::Db::ActiveRecord
 
   ActiveRecord::Base.connection_config[:pool].times do |idx|
     it "tests in parallel (#{idx + 1})" do
