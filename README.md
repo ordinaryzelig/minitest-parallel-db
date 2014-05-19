@@ -60,7 +60,7 @@ end
 
 At the time this gem was created, Minitest was at v4.7.5.
 Since then, the way to set the number of concurrent tests to be run has changed.
-Please let me know if the version of Minitest you are using doesn't work with this gme so I can try to patch the it.
+Please let me know if the version of Minitest you are using doesn't work with this gem so I can try to patch the it.
 
 ## Tips
 
