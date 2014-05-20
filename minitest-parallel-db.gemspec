@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Minitest::Parallel::Db::VERSION
   spec.authors       = ["Jared Ning"]
   spec.email         = ["jared@redningja.com"]
-  spec.description   = %q{Run tests in parallel with a database}
-  spec.summary       = %q{Run tests in parallel with a database}
+  spec.description   = %q{Run tests in parallel with a single database}
+  spec.summary       = %q{Run tests in parallel with a single database}
   spec.homepage      = "https://github.com/ordinaryzelig/minitest-parallel-db"
   spec.license       = "MIT"
 

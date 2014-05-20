@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ordinaryzelig/minitest-parallel-db.png?branch=master)](https://travis-ci.org/ordinaryzelig/minitest-parallel-db)
 
-Run Minitest in parallel with a database.
+Run Minitest in parallel with a single database.
 
 ## Rationale
 
