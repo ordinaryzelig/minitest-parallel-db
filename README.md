@@ -11,7 +11,7 @@ We can leverage database transactions to keep our tests isolated from each other
 
 There are solutions out there already, but some require creating multiple databases
 or running multiple processes.
-Yuck.
+None of that sounds appealing to me.
 
 ## The solution
 
