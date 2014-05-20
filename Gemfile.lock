@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    minitest-parallel-db (0.0.3)
+    minitest-parallel-db (0.0.4)
       minitest (>= 4.2)
 
 GEM
