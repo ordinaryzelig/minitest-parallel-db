@@ -16,24 +16,21 @@ Yuck.
 ## The solution
 
 Tests in parallel must be run in isolation.
-If the tests are sharing the same database and table,
-we have a problem.
+If the tests are sharing the same database and table, we have a problem.
 But if we can use a database transaction for each test,
-they will be run in isolation from each other (although
-write locks are still in effect).
+they will be run in isolation from each other
+(although write locks are still in effect).
 
 ## Usage
 
 ```ruby
 require 'minitest/parallel/db'
+Minitest::Test.send(:include, Minitest::Parallel::DB::ActiveRecord)
 # Set number of threads you want. Best to match your pool size.
 # Minitest defaults this to 2.
 Minitest::Parallel::Db.concurrency = 10
 
 describe 'your parallel tests' do
-
-  # The tests within this describe block can now be run in parallel.
-  include Minitest::Parallel::Db::ActiveRecord
 
   it 'saves a record' do
     model = Model.create!
@@ -61,6 +58,11 @@ end
 At the time this gem was created, Minitest was at v4.7.5.
 Since then, the way to set the number of concurrent tests to be run has changed.
 Please let me know if the version of Minitest you are using doesn't work with this gem so I can try to patch the it.
+
+### Rails
+
+If you are using a recent enough version of Rails, you don't need this gem.
+See the Rails section of my [blog post] (http://redningja.com/dev/parallel-tests-with-single-database/) about this.
 
 ## Tips
 

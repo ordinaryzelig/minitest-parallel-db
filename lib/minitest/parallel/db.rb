@@ -10,6 +10,7 @@ module Minitest
 
       def self.included(suite)
         suite.parallelize_me!
+        suite.send :prepend, InstanceMethods
       end
 
       class << self
@@ -27,11 +28,15 @@ module Minitest
 
       end
 
-      def run
-        adapter_run do
-          super
+      module InstanceMethods
+
+        def run
+          adapter_run do
+            super
+          end
+          self
         end
-        self
+
       end
 
     end
