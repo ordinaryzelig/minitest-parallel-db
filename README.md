@@ -25,7 +25,7 @@ they will be run in isolation from each other
 
 ```ruby
 require 'minitest/parallel/db'
-Minitest::Test.send(:include, Minitest::Parallel::DB::ActiveRecord)
+Minitest::Test.send(:include, Minitest::Parallel::Db::ActiveRecord)
 # Set number of threads you want. Best to match your pool size.
 # Minitest defaults this to 2.
 Minitest::Parallel::Db.concurrency = 10
